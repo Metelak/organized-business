@@ -39,6 +39,161 @@ const viewEmployees = () => {
         mainMenu();
     })
 }
+// initiate user adding a department, prompt response 
+const newDept = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'deptName',
+            message: 'Please provide the department name you would like to add?',
+            validate: deptName => {
+                if (deptName) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter a department name!');
+                    return false;
+                }
+            }
+        }
+    ]) // insert new department data into the Departments table
+        .then(data => {
+            const sql = `INSERT INTO departments (name) VALUES (?)`;
+            const params = [
+                data.name
+            ];
+            db.query(sql, params, (err, res) => {
+                if (err) throw err;
+                viewDepartments();
+                console.log(`${data.name} added!`)
+            });
+        })
+}
+// initiate user adding a new role/job title, prompt response
+const newRole = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'jobTitle',
+            message: 'Please provide the role you would like to add?',
+            validate: jobTitle => {
+                if (jobTitle) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter a role/job title!');
+                    return false;
+                }
+            }
+
+        },
+        { // prompt for salary of role named
+            type: 'text',
+            name: 'salary',
+            message: 'Please provide the salary for the role you would like to add?',
+            validate: salary => {
+                if (salary) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter a salary!');
+                    return false;
+                }
+            }
+        },
+        { // prompt for department ID of role named
+            type: 'text',
+            name: 'deptId',
+            message: 'Please provide the department ID of the role you would like to add?',
+            validate: deptId => {
+                if (deptId) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter a department ID!');
+                    return false;
+                }
+            }
+        }
+    ]) // insert new role/job title data into the Roles table
+        .then(data => {
+            console.log(data);
+            const sql = `INSERT INTO roles (title, salary, dept_id) VALUES (?,?,?)`;
+            const params = [
+                data.jobTitle,
+                data.salary,
+                data.deptId
+            ];
+            db.query(sql, params, (err, res) => {
+                if (err) throw err;
+                viewRoles();
+                console.log(`${data.jobTitle} added!`)
+            });
+        })
+}
+// initiate user adding a new employee, prompt response
+const newEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: 'text',
+            name: 'firstName',
+            message: 'Please provide the first name of the employee you would like to add?',
+            validate: firstName => {
+                if (firstName) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter their first name!');
+                    return false;
+                }
+            }
+
+        },
+        {
+            type: 'text',
+            name: 'lastName',
+            message: 'Please provide the last name of the employee you would like to add?',
+            validate: lastName => {
+                if (lastName) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter their last name!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'roleId',
+            message: 'Please provide the role ID of the employee you would like to add?',
+            validate: roleId => {
+                if (roleId) {
+                    return true;
+                } else {
+                    console.log('Dont forget to enter their role ID!');
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'text',
+            name: 'managerId',
+            message: 'Please provide the manager ID of the employee you would like to add?'
+        }
+    ])
+        .then(data => {
+            console.log(data);
+            const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
+            const params = [
+                data.firstName,
+                data.lastName,
+                data.roleId,
+                data.managerId
+            ];
+            db.query(sql, params, (err, res) => {
+                if (err) throw err;
+                console.log(res);
+                viewEmployees();
+                console.log(`${data.firstName} ${data.lastName} added!`)
+            });
+        })
+}
+
 
 // main menu prompts to view tables or add to tables
 const mainMenu = () => {
@@ -67,13 +222,13 @@ const mainMenu = () => {
                 viewEmployees();
             }
             if (data.promptResponse === 'Add a department') {
-                addDepartment();
+                newDept();
             }
             if (data.promptResponse === 'Add a role') {
-                addRole();
+                newRole();
             }
             if (data.promptResponse === 'Add an employee') {
-                addEmployee();
+                newEmployee();
             }
             if (data.promptResponse === 'Update employee role') {
                 updateRole();
