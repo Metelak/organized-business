@@ -3,8 +3,50 @@ const inquirer = require('inquirer');
 const { queries } = require('./db/connection');
 const db = require('./db/connection');
 
+// user response to view the departments table
+const viewDepartments = () => {
+    const sql = `SELECT * FROM departments`;
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('Departments:', res);
+        mainMenu();
+    })
+}
+
+// user response to view the roles table
+const viewRoles = () => {
+    const sql = `SELECT * FROM roles`;
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('Roles:', res);
+        mainMenu();
+    })
+}
+
+// user response to view the employees table
+const viewEmployees = () => {
+    // table sections, combining tables to pull in title, dept and salaries
+    const sql = `SELECT employees.id, employees.first_name, employees.last_name, employees.manager_id, roles.title, roles.salary, departments.id AS department
+    FROM employees
+    LEFT JOIN roles
+    ON employees.role_id = roles.id
+    LEFT JOIN departments
+    ON roles.dept_id = departments.id`;
+
+    db.query(sql, (err, res) => {
+        if (err) throw err;
+        console.table('Employees:', res);
+        mainMenu();
+    })
+}
+
 // main menu prompts to view tables or add to tables
 const mainMenu = () => {
+    console.log(`
+    ==================================================
+    Main Menu, please select from options listed below
+    ==================================================
+    `);
     return inquirer.prompt([
         {
             type: 'list',

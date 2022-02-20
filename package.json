@@ -1,0 +1,24 @@
+{
+  "name": "organized-business",
+  "version": "1.0.0",
+  "description": "prompt mysql table organization of business dept, roles, and employees",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Metelak/organized-business.git"
+  },
+  "author": "Metelak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Metelak/organized-business/issues"
+  },
+  "homepage": "https://github.com/Metelak/organized-business#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3"
+  }
+}
