@@ -130,7 +130,7 @@ const newRole = () => {
 // initiate user adding a new employee, prompt response
 const newEmployee = () => {
     return inquirer.prompt([
-        {
+        { // prompt to add first name
             type: 'text',
             name: 'firstName',
             message: 'Please provide the first name of the employee you would like to add?',
@@ -144,7 +144,7 @@ const newEmployee = () => {
             }
 
         },
-        {
+        { // prompt to add last name
             type: 'text',
             name: 'lastName',
             message: 'Please provide the last name of the employee you would like to add?',
@@ -157,7 +157,7 @@ const newEmployee = () => {
                 }
             }
         },
-        {
+        { // prompt to choose an role ID 
             type: 'text',
             name: 'roleId',
             message: 'Please provide the role ID of the employee you would like to add?',
@@ -170,15 +170,15 @@ const newEmployee = () => {
                 }
             }
         },
-        {
+        { // prompt to choose a manager ID
             type: 'text',
             name: 'managerId',
             message: 'Please provide the manager ID of the employee you would like to add?'
         }
-    ])
+    ]) // insert new employee data into the Employees table
         .then(data => {
             console.log(data);
-            const sql = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
+            const sql = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
             const params = [
                 data.firstName,
                 data.lastName,
@@ -192,6 +192,35 @@ const newEmployee = () => {
                 console.log(`${data.firstName} ${data.lastName} added!`)
             });
         })
+}
+// initiate user ability to update an employee role
+const updateRole = () => {
+    return inquirer.prompt([
+        { // prompt to indicate the employee ID
+            type: 'text',
+            name: 'currentRole',
+            message: 'Please provide the ID of the employee you would like to update?'
+        },
+        { // prompt to indicate the new role ID 
+            type: 'text',
+            name: 'updatedRole',
+            message: 'Please provide the ID of the new role of the employee?'
+        }
+    ]).then(data => { // update the Employees table to replace selected employees role ID
+        console.log(data);
+        const sql = `UPDATE employees SET role_id = ?
+            WHERE employees.id = ?`;
+        const params = [
+            data.updatedRole,
+            data.currentRole
+        ];
+        db.query(sql, params, (err, res) => {
+            if (err) throw err;
+            console.log(res);
+            viewEmployees();
+            console.log(`Role updated to ID ${data.updatedRole}`)
+        });
+    });
 }
 
 
@@ -209,7 +238,7 @@ const mainMenu = () => {
             message: 'What would you like to do?',
             choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role', 'Delete a department', 'Delete a role', 'Delete an employee', 'EXIT']
         }
-    ])
+    ]) // connecting user selction response
         .then(data => {
 
             if (data.promptResponse === 'View all departments') {
@@ -233,15 +262,6 @@ const mainMenu = () => {
             if (data.promptResponse === 'Update employee role') {
                 updateRole();
             }
-            if (data.promptResponse === 'Delete a department') {
-                deleteDepartment();
-            }
-            if (data.promptResponse === 'Delete a role') {
-                deleteRole();
-            }
-            if (data.promptResponse === 'Delete an employee') {
-                deleteEmployee();
-            }
             if (data.promptResponse === 'EXIT') {
                 db.end();
             }
@@ -249,3 +269,16 @@ const mainMenu = () => {
 }
 // initiates the function when user runs node index
 mainMenu();
+
+
+// start of adding delete function
+
+ // if (data.promptResponse === 'Delete a department') {
+            //     deleteDepartment();
+            // }
+            // if (data.promptResponse === 'Delete a role') {
+            //     deleteRole();
+            // }
+            // if (data.promptResponse === 'Delete an employee') {
+            //     deleteEmployee();
+// }
