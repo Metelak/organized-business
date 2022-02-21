@@ -6,6 +6,7 @@
 An application that prompts the user in the command-line to input information into SQL tables regarding employees, departments and roles which allows a business to keep everything organized and up to date.  
 
 ## **Preview Image:**
+![preview organized business](https://user-images.githubusercontent.com/94068596/154875135-57144e3b-8999-4859-91de-9a5296f69b5b.jpg)
 
 
 ## **Progams:**
