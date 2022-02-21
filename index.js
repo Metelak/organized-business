@@ -236,7 +236,7 @@ const mainMenu = () => {
             type: 'list',
             name: 'promptResponse',
             message: 'What would you like to do?',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role', 'Delete a department', 'Delete a role', 'Delete an employee', 'EXIT']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role','EXIT']
         }
     ]) // connecting user selction response
         .then(data => {

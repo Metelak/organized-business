@@ -18,7 +18,7 @@ An application that prompts the user in the command-line to input information in
 Please feel free to download this project from my repo to your local drive. Open in VS Code and make sure to install all packages prior to running the progam. Refer to video below for further demonstration of how the application works. 
 
 ## **Project Links:**
-### [**organized-business Repository**](https://github.com/Metelak/Team-Maker)
+### [**organized-business Repository**](https://github.com/Metelak/organized-business/tree/main)
 ### [**CLICK HERE FOR DEMO VIDEO**](https://watch.screencastify.com/v/iPd56V9q9ASPKVq6dHb5)
 
 ## **Questions:**
