@@ -57,14 +57,14 @@ const newDept = () => {
         }
     ]) // insert new department data into the Departments table
         .then(data => {
-            const sql = `INSERT INTO departments (name) VALUES (?)`;
+            const sql = `INSERT INTO departments (deptName) VALUES (?)`;
             const params = [
                 data.name
             ];
             db.query(sql, params, (err, res) => {
                 if (err) throw err;
                 viewDepartments();
-                console.log(`${data.name} added!`)
+                console.log(`${data.deptName} added!`)
             });
         })
 }

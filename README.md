@@ -19,7 +19,7 @@ Please feel free to download this project from my repo to your local drive. Open
 
 ## **Project Links:**
 ### [**organized-business Repository**](https://github.com/Metelak/organized-business/tree/main)
-### [**CLICK HERE FOR DEMO VIDEO**](https://watch.screencastify.com/v/iPd56V9q9ASPKVq6dHb5)
+### [**CLICK HERE FOR DEMO VIDEO**](https://drive.google.com/file/d/1DWwhYtOIj_u5lPsKsmJ72pmMjItAt-_m/view)
 
 ## **Questions:**
 If you have any questions regarding this application, contact me through [GitHub](https://github.com/Metelak) or [Email](megan.metelak@gmail.com).
